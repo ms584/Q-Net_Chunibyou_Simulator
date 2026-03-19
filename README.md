@@ -4,7 +4,7 @@
 
 🌐 **Live Demo:** [https://q-net-chunibyou-simulator.onrender.com](https://q-net-chunibyou-simulator.onrender.com)
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://q-net-chunibyou-simulator.onrender.com/)
 
 ---
 
