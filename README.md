@@ -2,7 +2,9 @@
 
 > **Sprint 4 Build** — Web dashboard จำลองระบบสื่อสารเชิงควอนตัม (Quantum Networking) ระหว่างดาวเคราะห์และดาวฤกษ์ใกล้เคียง โดยเปรียบเทียบ **Classic TCP/IP** กับ **Q-Net Warp Transmission** แบบ Real-time
 
-![Dashboard Preview](./public/preview.png)
+🌐 **Live Demo:** [https://q-net-chunibyou-simulator.onrender.com](https://q-net-chunibyou-simulator.onrender.com)
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
 ---
 
