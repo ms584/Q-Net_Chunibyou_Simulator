@@ -59,7 +59,7 @@ export default function ConsoleLog({ logTrigger }) {
   const [entries, setEntries] = useState([]);
   const [modeTarget, setModeTarget] = useState({ mode: 'qnet', targetKey: 'MARS' });
   const [idx, setIdx] = useState(0);
-  const bottomRef = useRef(null);
+  const scrollRef = useRef(null); // ref on the scroll container, not a bottom sentinel
 
   // When mode/target changes, drain the new log sequence
   useEffect(() => {
@@ -98,7 +98,11 @@ export default function ConsoleLog({ logTrigger }) {
     return () => clearTimeout(t);
   }, [idx, modeTarget]);
 
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [entries]);
+  // Scroll only within the log container — NOT scrollIntoView (which scrolls the whole page on mobile)
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [entries]);
 
   return (
     <div className="panel flex flex-col h-full overflow-hidden">
@@ -121,8 +125,8 @@ export default function ConsoleLog({ logTrigger }) {
         </div>
       </div>
 
-      {/* Log stream */}
-      <div className="flex-1 overflow-y-auto p-2 font-mono text-xs" style={{ lineHeight: 1.75 }}>
+      {/* Log stream — ref is on the scrollable container itself */}
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-2 font-mono text-xs" style={{ lineHeight: 1.75 }}>
         {entries.map(e => (
           <div key={e.id} className="flex gap-2 items-start" style={{ animation: 'fadeIn 0.25s ease' }}>
             <span style={{ color: 'rgba(0,245,255,0.28)', minWidth: 88, flexShrink: 0 }}>[{e.ts}]</span>
@@ -134,7 +138,6 @@ export default function ConsoleLog({ logTrigger }) {
             <span style={{ color: 'rgba(195,235,255,0.82)' }}>{e.txt}</span>
           </div>
         ))}
-        <div ref={bottomRef} />
         <div style={{ display: 'flex', gap: 8 }}>
           <span style={{ minWidth: 88 }} />
           <span style={{ color: '#00f5ff', animation: 'pulse-dot 0.9s ease-in-out infinite' }}>▌</span>
